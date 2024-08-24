@@ -1,7 +1,7 @@
 package tech.ada.poo.base.biblioteca.service;
 
 public class Livro extends ItemCatalogo{
-    String isbn;
-    int numeroPaginas;
-    String editora;
+    private String isbn;
+    private int numeroPaginas;
+    private String editora;
 }
