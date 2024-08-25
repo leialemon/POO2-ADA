@@ -1,6 +1,10 @@
 package tech.ada.poo.base.biblioteca.service;
 
+import java.util.List;
+
 public class BibliotecaServiceFisicaImpl extends BibliotecaServiceImpl implements BibliotecaServiceFisica{
+
+
 
     @Override
     public void emprestar() {
@@ -19,11 +23,15 @@ public class BibliotecaServiceFisicaImpl extends BibliotecaServiceImpl implement
 
     @Override
     public void consultar() {
-        System.out.println("Reservando item.");
+        System.out.println("Consultando item.");
     }
 
     @Override
-    public void cadastrar() {
+    public void cadastrar(ItemCatalogo item) {
+        addCatalogo(item);
+    }
 
+    public List<ItemCatalogo> showCatalogo(){
+        return getItens();
     }
 }
