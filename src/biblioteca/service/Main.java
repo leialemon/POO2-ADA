@@ -6,17 +6,8 @@ import java.util.Objects;
 
 public class Main {
     public static void main(String[] args){
-        BibliotecaServiceFisicaImpl bibliotecaFisica = new BibliotecaServiceFisicaImpl();
-        Livro livroTeste = new Livro("240345638", 300, "editora", "título", "autor", LocalDate.now());
-        Livro livro2 = new Livro("1237489", 358, "Jambô", "A Cidade da raposa", "Lucas Borne", LocalDate.now());
-        Livro livro3 = new Livro("8935467", 422, "Alta Books", "Código Limpo", "Robert C. Martin", LocalDate.now());
-        Revista revista1 = new Revista("Revista de Teste", "Autor da revista", LocalDate.now(), 50, "Janeiro", "Variedades");
-        bibliotecaFisica.addCatalogo(livroTeste);
-        bibliotecaFisica.addCatalogo(livro2);
-        bibliotecaFisica.addCatalogo(livro3);
-        bibliotecaFisica.addCatalogo(revista1);
-        List<ItemCatalogo> catalogo = bibliotecaFisica.getItens();
-        mostrarCatalogo(catalogo);
+        // Recomenda-se declarar o tipo da interface e não o da classe que implementa
+
     }
 
     public static void mostrarCatalogo(List<ItemCatalogo> catalogo){

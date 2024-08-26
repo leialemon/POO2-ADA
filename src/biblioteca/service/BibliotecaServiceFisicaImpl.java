@@ -4,7 +4,11 @@ import java.util.List;
 
 public class BibliotecaServiceFisicaImpl extends BibliotecaServiceImpl implements BibliotecaServiceFisica{
 
+    BibliotecaRepositorioListImpl catalogo;
 
+    public BibliotecaServiceFisicaImpl(BibliotecaRepositorioListImpl catalogo){
+        this.catalogo = catalogo;
+    }
 
     @Override
     public void emprestar() {
@@ -28,10 +32,6 @@ public class BibliotecaServiceFisicaImpl extends BibliotecaServiceImpl implement
 
     @Override
     public void cadastrar(ItemCatalogo item) {
-        addCatalogo(item);
-    }
-
-    public List<ItemCatalogo> showCatalogo(){
-        return getItens();
+        catalogo.salvar(item);
     }
 }
