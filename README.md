@@ -125,4 +125,4 @@ class Manuscrito{
 }
 ```
 ## Processos - Swimlane
-![Diagrama de processos do projeto no modelo Swimlane.](https://static.swimlanes.io/9cacd84a27f7e2a52f85c0d2ed36f613.png)
+![Diagrama de processos do projeto no modelo Swimlane.](https://static.swimlanes.io/e524c71301833e15d65725c3340597a0.png)
