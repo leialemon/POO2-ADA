@@ -1,8 +1,18 @@
-package tech.ada.poo.base.biblioteca.service;
+package tech.ada.poo.base.biblioteca;
 
-import java.time.LocalDate;
+import tech.ada.poo.base.biblioteca.model.ItemCatalogo;
+import tech.ada.poo.base.biblioteca.model.Livro;
+import tech.ada.poo.base.biblioteca.model.Manuscrito;
+import tech.ada.poo.base.biblioteca.model.Revista;
+
 import java.util.List;
-import java.util.Objects;
+
+// Criar um método para prorrogar o empréstimo?
+// Criar uma classe empréstimo para registrar datas e aplicar multas?
+// (Impedir que empreste outro livro se não tiver devolvido o anterior)
+// Criar uma classe reserva para implementar um limite de reservas simultâneas que cada associado pode ter.
+// Classe Reserva para acompanhar o andamento das reservas e saber quando o item ficar disponível.
+// Controlar fila de reservas de um item.
 
 public class Main {
     public static void main(String[] args){

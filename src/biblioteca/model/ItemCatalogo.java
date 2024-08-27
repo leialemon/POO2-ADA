@@ -1,4 +1,4 @@
-package tech.ada.poo.base.biblioteca.service;
+package tech.ada.poo.base.biblioteca.model;
 
 import java.time.LocalDate;
 
@@ -6,6 +6,8 @@ public abstract class ItemCatalogo {
     private String titulo;
     private String autor;
     private LocalDate data;
+    private boolean reservado;
+    private boolean emprestado;
 
     public ItemCatalogo(String titulo, String autor, LocalDate data){
         this.titulo = titulo;
@@ -23,5 +25,17 @@ public abstract class ItemCatalogo {
 
     public LocalDate getData(){
         return data;
+    }
+
+    public boolean isReservado(){ return reservado;}
+
+    public void setReservado(boolean reservado){
+        this.reservado = reservado;
+    }
+
+    public boolean isEmprestado(){ return emprestado;}
+
+    public void setEmprestado(boolean emprestado){
+        this.emprestado = emprestado;
     }
 }

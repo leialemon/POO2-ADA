@@ -1,16 +1,33 @@
 package tech.ada.poo.base.biblioteca.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import tech.ada.poo.base.biblioteca.model.ItemCatalogo;
+import tech.ada.poo.base.biblioteca.persistence.BibliotecaRepositorio;
 
-abstract class BibliotecaServiceImpl {
-    private List<ItemCatalogo> itens = new ArrayList<ItemCatalogo>();
+abstract class BibliotecaServiceImpl implements BibliotecaService{
+    protected BibliotecaRepositorio catalogo;
 
-    public void addCatalogo(ItemCatalogo item){
-        itens.add(item);
+    public void setCatalogo(BibliotecaRepositorio catalogo) {
+        this.catalogo = catalogo;
     }
 
-    public List<ItemCatalogo> getItens(){
-        return itens;
+    @Override
+    public void reservar(ItemCatalogo item) {
+        item.setReservado(true);
+        System.out.println("Item reservado.");
+    }
+
+    @Override
+    public void consultarItem(ItemCatalogo item) {
+
+    }
+
+    @Override
+    public void consultarAutor(String autor) {
+
+    }
+
+    @Override
+    public void consultarTitulo(String titulo) {
+
     }
 }

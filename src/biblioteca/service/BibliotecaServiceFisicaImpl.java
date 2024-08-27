@@ -1,37 +1,57 @@
 package tech.ada.poo.base.biblioteca.service;
 
-import java.util.List;
+import tech.ada.poo.base.biblioteca.model.ItemCatalogo;
+import tech.ada.poo.base.biblioteca.persistence.BibliotecaRepositorio;
+import tech.ada.poo.base.biblioteca.persistence.BibliotecaRepositorioListImpl;
+
+import java.time.LocalDate;
 
 public class BibliotecaServiceFisicaImpl extends BibliotecaServiceImpl implements BibliotecaServiceFisica{
 
-    BibliotecaRepositorioListImpl catalogo;
-
-    public BibliotecaServiceFisicaImpl(BibliotecaRepositorioListImpl catalogo){
-        this.catalogo = catalogo;
+    public BibliotecaServiceFisicaImpl(BibliotecaRepositorio catalogo){
+        super.setCatalogo(catalogo);
     }
 
     @Override
-    public void emprestar() {
-        System.out.println("Emprestando item.");
+    public void reservar(ItemCatalogo item) {
+        super.reservar(item);
     }
 
     @Override
-    public void devolver() {
-        System.out.println("Devolvendo item.");
+    public void emprestar(ItemCatalogo item) {
+        item.setEmprestado(true);
+        if (item.isReservado()){item.setReservado(false);}
+        System.out.println("Empréstimo registrado.");
+        LocalDate emprestimo = LocalDate.now();
+        LocalDate devolucao = emprestimo.plusDays(15);
+        System.out.println("Data do Empréstimo: "+ emprestimo);
+        System.out.println("Data de Devolução: "+ devolucao);
     }
 
     @Override
-    public void reservar() {
-        System.out.println("Reservando item.");
-    }
-
-    @Override
-    public void consultar() {
-        System.out.println("Consultando item.");
+    public void devolver(ItemCatalogo item) {
+        item.setEmprestado(false);
+        System.out.println("Item devolvido.");
     }
 
     @Override
     public void cadastrar(ItemCatalogo item) {
         catalogo.salvar(item);
+        System.out.println("Item cadastrado.");
+    }
+
+    @Override
+    public void consultarItem(ItemCatalogo item) {
+        super.consultarItem(item);
+    }
+
+    @Override
+    public void consultarAutor(String autor) {
+        super.consultarAutor(autor);
+    }
+
+    @Override
+    public void consultarTitulo(String titulo) {
+        super.consultarTitulo(titulo);
     }
 }

@@ -1,21 +1,34 @@
 package tech.ada.poo.base.biblioteca.service;
 
-import java.util.List;
+import tech.ada.poo.base.biblioteca.model.ItemCatalogo;
+import tech.ada.poo.base.biblioteca.persistence.BibliotecaRepositorio;
 
-public class BibliotecaServiceVirtualImpl extends BibliotecaServiceImpl implements BibliotecaServiceVirtual{
-    private BibliotecaRepositorioListImpl catalogo;
 
-    public BibliotecaServiceVirtualImpl(BibliotecaRepositorioListImpl catalogo){
-        this.catalogo = catalogo;
+public class BibliotecaServiceVirtualImpl extends BibliotecaServiceImpl implements BibliotecaServiceVirtual {
+    private BibliotecaRepositorio catalogo;
+
+    public BibliotecaServiceVirtualImpl(BibliotecaRepositorio catalogo) {
+        super.setCatalogo(catalogo);
     }
 
     @Override
-    public void reservar() {
-        System.out.println("Reservando item.");
+    public void reservar(ItemCatalogo item) {
+        super.reservar(item);
     }
 
     @Override
-    public void consultar() {
-        System.out.println("Consultando item.");
+    public void consultarItem(ItemCatalogo item) {
+        super.consultarItem(item);
+    }
+
+    @Override
+    public void consultarAutor(String autor) {
+        super.consultarAutor(autor);
+    }
+
+    @Override
+    public void consultarTitulo(String titulo) {
+        super.consultarTitulo(titulo);
     }
 }
+

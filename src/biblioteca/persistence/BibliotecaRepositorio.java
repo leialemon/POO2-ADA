@@ -1,6 +1,7 @@
-package tech.ada.poo.base.biblioteca.service;
+package tech.ada.poo.base.biblioteca.persistence;
 
-import java.util.ArrayList;
+import tech.ada.poo.base.biblioteca.model.ItemCatalogo;
+
 import java.util.List;
 
 public interface BibliotecaRepositorio {
