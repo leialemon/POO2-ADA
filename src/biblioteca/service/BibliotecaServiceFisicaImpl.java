@@ -39,14 +39,4 @@ public class BibliotecaServiceFisicaImpl extends BibliotecaServiceImpl implement
         catalogo.salvar(item);
         System.out.println("Item cadastrado.");
     }
-
-    @Override
-    public void consultarItem(ItemCatalogo item) {
-        super.consultarItem(item);
-    }
-
-    @Override
-    public void consultarTitulo(String titulo) {
-        super.consultarTitulo(titulo);
-    }
 }

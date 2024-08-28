@@ -42,7 +42,7 @@ public abstract class ItemCatalogo {
     @Override
     public boolean equals(Object obj) {
         if (obj != null && !(obj instanceof ItemCatalogo)) return false;
-        ItemCatalogo item = (ItemCatalogo) obj;
+        ItemCatalogo item = (ItemCatalogo) obj; // Casting para fazer comparação.
 
         if ( this.titulo.equalsIgnoreCase(item.getTitulo()) )
             return true;

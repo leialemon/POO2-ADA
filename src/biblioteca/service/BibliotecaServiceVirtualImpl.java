@@ -10,20 +10,5 @@ public class BibliotecaServiceVirtualImpl extends BibliotecaServiceImpl implemen
     public BibliotecaServiceVirtualImpl(BibliotecaRepositorio catalogo) {
         super.setCatalogo(catalogo);
     }
-
-    @Override
-    public void reservar(ItemCatalogo item) {
-        super.reservar(item);
-    }
-
-    @Override
-    public void consultarItem(ItemCatalogo item) {
-        super.consultarItem(item);
-    }
-
-    @Override
-    public void consultarTitulo(String titulo) {
-        super.consultarTitulo(titulo);
-    }
 }
 
