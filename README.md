@@ -31,7 +31,6 @@ namespace model{
 BibliotecaService: +setCatalogo(BibliotecaRepositorio catalogo)
 BibliotecaService: + reservar(ItemCatalogo item)
 BibliotecaService: + consultarItem(ItemCatalogo item)
-BibliotecaService: + consultarAutor(String autor)
 BibliotecaService: + consultarTitulo(String titulo)
 BibliotecaService <|-- BibliotecaServiceFisica
 BibliotecaService <|-- BibliotecaServiceVirtual
@@ -46,7 +45,6 @@ BibliotecaServiceFisicaImpl: + reservar(ItemCatalogo item)
 BibliotecaServiceFisicaImpl: + emprestar(ItemCatalogo item)
 BibliotecaServiceFisicaImpl: + devolver(ItemCatalogo item)
 BibliotecaServiceFisicaImpl: + consultarItem(ItemCatalogo item)
-BibliotecaServiceFisicaImpl: + consultarAutor(String autor)
 BibliotecaServiceFisicaImpl: + consultarTitulo(String titulo)
 BibliotecaServiceFisicaImpl: + cadastrar(ItemCatalogo)
 BibliotecaServiceFisicaImpl: - BibliotecaRepositorio catalogo
@@ -59,7 +57,6 @@ BibliotecaServiceImpl: # BibliotecaRepositorio catalogo
 BibliotecaServiceImpl: +setCatalogo(BibliotecaRepositorio catalogo)
 BibliotecaServiceImpl: + reservar(ItemCatalogo item)
 BibliotecaServiceImpl: + consultarItem(ItemCatalogo item)
-BibliotecaServiceImpl: + consultarAutor(String autor)
 BibliotecaServiceImpl: + consultarTitulo(String titulo)
 
 <<Interface>>BibliotecaServiceVirtual
@@ -68,7 +65,6 @@ BibliotecaServiceVirtual ..|> BibliotecaServiceVirtualImpl
 BibliotecaServiceVirtualImpl: - BibliotecaRepositorio catalogo
 BibliotecaServiceVirtualImpl: + reservar(ItemCatalogo item)
 BibliotecaServiceVirtualImpl: + consultarItem(ItemCatalogo item)
-BibliotecaServiceVirtualImpl: + consultarAutor(String autor)
 BibliotecaServiceVirtualImpl: + consultarTitulo(String titulo)
 
 <<Abstract>>ItemCatalogo
@@ -84,17 +80,22 @@ ItemCatalogo: + setEmprestado(boolean emprestado)
 ItemCatalogo: +getTitulo() String titulo
 ItemCatalogo: +getAutor() String autor
 ItemCatalogo: +getData() LocalDate data
+ItemCatalogo: + equals(Object obj) boolean
 ItemCatalogo <|-- Livro
 ItemCatalogo <|-- Revista
 ItemCatalogo <|-- Manuscrito
 
 <<Interface>> BibliotecaRepositorio
-BibliotecaRepositorio: + salvar(ItemCatalogo)
+BibliotecaRepositorio: + salvar(ItemCatalogo item)
+BibliotecaRepositorio: + consultar(String titulo) boolean
+BibliotecaRepositorio: + consultar(ItemCatalogo item) boolean
 BibliotecaRepositorio: +getCatalogo() List<ItemCatalogo>
 
 BibliotecaRepositorio ..|> BibliotecaRepositorioListImpl
 BibliotecaRepositorioListImpl: - List<ItemCatalogo> catalogo
 BibliotecaRepositorioListImpl: + salvar(ItemCatalogo)
+BibliotecaRepositorioListImpl: + consultar(String titulo) boolean
+BibliotecaRepositorioListImpl: + consultar(ItemCatalogo item) boolean
 BibliotecaRepositorioListImpl: +getCatalogo() List<ItemCatalogo>
 
 class Livro{
@@ -125,4 +126,4 @@ class Manuscrito{
 }
 ```
 ## Processos - Swimlane
-![Diagrama de processos do projeto no modelo Swimlane.](https://static.swimlanes.io/e524c71301833e15d65725c3340597a0.png)
+![Diagrama de processos do projeto no modelo Swimlane.](https://static.swimlanes.io/f5274c09f316e82127e5cae09fd2fca2.png)
