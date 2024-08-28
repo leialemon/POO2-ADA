@@ -22,11 +22,6 @@ abstract class BibliotecaServiceImpl implements BibliotecaService{
     }
 
     @Override
-    public void consultarAutor(String autor) {
-
-    }
-
-    @Override
     public void consultarTitulo(String titulo) {
 
     }

@@ -22,11 +22,6 @@ public class BibliotecaServiceVirtualImpl extends BibliotecaServiceImpl implemen
     }
 
     @Override
-    public void consultarAutor(String autor) {
-        super.consultarAutor(autor);
-    }
-
-    @Override
     public void consultarTitulo(String titulo) {
         super.consultarTitulo(titulo);
     }

@@ -7,12 +7,14 @@ import tech.ada.poo.base.biblioteca.model.Revista;
 
 import java.util.List;
 
-// Criar um método para prorrogar o empréstimo?
+// Criar classe de pessoas para gerir associados da biblioteca
+// Criar métodos para prorrogar o empréstimo?
 // Criar uma classe empréstimo para registrar datas e aplicar multas?
 // (Impedir que empreste outro livro se não tiver devolvido o anterior)
 // Criar uma classe reserva para implementar um limite de reservas simultâneas que cada associado pode ter.
 // Classe Reserva para acompanhar o andamento das reservas e saber quando o item ficar disponível.
 // Controlar fila de reservas de um item.
+// Criar classe autor e mudar o atributo de ItemCatalogo (String autor → Autor autor)?
 
 public class Main {
     public static void main(String[] args){

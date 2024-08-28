@@ -38,4 +38,15 @@ public abstract class ItemCatalogo {
     public void setEmprestado(boolean emprestado){
         this.emprestado = emprestado;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null && !(obj instanceof ItemCatalogo)) return false;
+        ItemCatalogo item = (ItemCatalogo) obj;
+
+        if ( this.titulo.equalsIgnoreCase(item.getTitulo()) )
+            return true;
+
+        return false;
+    }
 }

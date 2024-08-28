@@ -46,11 +46,6 @@ public class BibliotecaServiceFisicaImpl extends BibliotecaServiceImpl implement
     }
 
     @Override
-    public void consultarAutor(String autor) {
-        super.consultarAutor(autor);
-    }
-
-    @Override
     public void consultarTitulo(String titulo) {
         super.consultarTitulo(titulo);
     }
