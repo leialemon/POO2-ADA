@@ -41,11 +41,8 @@ BibliotecaServiceFisica: + devolver(ItemCatalogo item)
 BibliotecaServiceFisica: + cadastrar(ItemCatalogo)
 
 BibliotecaServiceFisica ..|> BibliotecaServiceFisicaImpl
-BibliotecaServiceFisicaImpl: + reservar(ItemCatalogo item)
 BibliotecaServiceFisicaImpl: + emprestar(ItemCatalogo item)
 BibliotecaServiceFisicaImpl: + devolver(ItemCatalogo item)
-BibliotecaServiceFisicaImpl: + consultarItem(ItemCatalogo item)
-BibliotecaServiceFisicaImpl: + consultarTitulo(String titulo)
 BibliotecaServiceFisicaImpl: + cadastrar(ItemCatalogo)
 BibliotecaServiceFisicaImpl: - BibliotecaRepositorio catalogo
 
@@ -63,9 +60,6 @@ BibliotecaServiceImpl: + consultarTitulo(String titulo)
 
 BibliotecaServiceVirtual ..|> BibliotecaServiceVirtualImpl
 BibliotecaServiceVirtualImpl: - BibliotecaRepositorio catalogo
-BibliotecaServiceVirtualImpl: + reservar(ItemCatalogo item)
-BibliotecaServiceVirtualImpl: + consultarItem(ItemCatalogo item)
-BibliotecaServiceVirtualImpl: + consultarTitulo(String titulo)
 
 <<Abstract>>ItemCatalogo
 ItemCatalogo: - String titulo
