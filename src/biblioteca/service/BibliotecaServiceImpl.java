@@ -18,11 +18,11 @@ abstract class BibliotecaServiceImpl implements BibliotecaService{
 
     @Override
     public void consultarItem(ItemCatalogo item) {
-
+        catalogo.consultar(item);
     }
 
     @Override
     public void consultarTitulo(String titulo) {
-
+        catalogo.consultar(titulo);
     }
 }
