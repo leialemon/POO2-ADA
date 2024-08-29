@@ -14,11 +14,12 @@ public abstract class ItemCatalogo {
     public ItemCatalogo(String titulo, Autor autor, Secao secao){
         if(titulo == null || autor == null){
             throw new IllegalArgumentException("Os campos 'título' e 'autor' não podem ser nulos!");
+        } else {
+            this.titulo = titulo;
+            this.autor = autor;
+            setSecao(secao);
+            historico = new ArrayList<>();
         }
-        this.titulo = titulo;
-        this.autor = autor;
-        setSecao(secao);
-        historico = new ArrayList<>();
     }
 
     public Autor getAutor(){return this.autor;}

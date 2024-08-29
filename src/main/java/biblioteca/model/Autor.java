@@ -25,7 +25,4 @@ public class Autor  extends  Pessoa{
     public void addObra(ItemCatalogo obra){
         this.obras.add(obra);
     }
-
-
-
 }
