@@ -29,10 +29,15 @@ namespace model{
     class Pessoa
     class Autor
     class Associado
+}
+
+namespace operacoes{
     class Operacoes
     class Reserva
     class Emprestimo
     class Multa
+    class PagamentoMulta
+    class Devolucao
 }
 
 <<Interface>>BibliotecaService
@@ -80,20 +85,16 @@ BibliotecaServiceVirtualImpl: - BibliotecaRepositorio catalogo
 <<Abstract>>ItemCatalogo
 ItemCatalogo: - String titulo
 ItemCatalogo: - Autor autor
-ItemCatalogo: - LocalDate data
 ItemCatalogo: - Secao secao
 ItemCatalogo: - Reserva reservaAtiva
-ItemCatalogo: - boolean disponivel
 ItemCatalogo: - Emprestimo emprestimo
-ItemCatalogo: - List historicoEmprestimos 
-ItemCatalogo: + getReservas() List 
+ItemCatalogo: - List historico
+ItemCatalogo: + getReserva() Reserva
 ItemCatalogo: + setReservado(Reserva)
-ItemCatalogo: + isDisponivel() boolean 
 ItemCatalogo: + setEmprestado(Emprestimo)
 ItemCatalogo: + getEmprestimo() Emprestimo
 ItemCatalogo: +getTitulo() String titulo
 ItemCatalogo: +getAutor() Autor autor
-ItemCatalogo: +getData() LocalDate data
 ItemCatalogo: + getSecao() Secao
 ItemCatalogo: + setSecao(Secao)
 ItemCatalogo: + equals(Object obj) boolean
@@ -127,20 +128,20 @@ class Revista{
     -int numeroEdicao
     -String mesPublicacao
     -String categoria
+    + construtor com Secao.REVISTAS
     + getEdicao() int numeroEdicao
     + getMes() String mesPublicacao
     + getCategoria() String categoria
-    + setSecao() @Override
 }
 
 class Manuscrito{
     -String localOrigem
     -String estadoConservacao
     -boolean digitalizado
+    + construtor com Secao.MANUSCRITOS
     + getLocal() String localOrigem
     + getConservacao() String estadoConservacao
     + getDigitalizado() boolean digitalizado
-    + setSecao() @Override
 }
 
 <<Enumerate>> Secao
@@ -176,17 +177,17 @@ class Autor{
 
 class Associado{
     - LocalDate dataDeCadastro
-    - List historicoEmprestimos
-    - List historicoReservas 
+    - List historico
     - Emprestimo emprestimoAtivo
     - Reserva reservaAtiva
-    - List multas
 }
 
 <<Abstract>> Operacoes
 Operacoes <|-- Emprestimo
 Operacoes <|-- Multa
 Operacoes <|-- Reserva
+Operacoes <|-- PagamentoMulta
+Operacoes <|-- Devolucao
 
 class Operacoes{
     - Associado associado
@@ -197,16 +198,23 @@ class Operacoes{
 }
 
 class Emprestimo{
-    - setVirtual() @Override
+    - setVirtual(boolean) @Override
     - LocalDate devolucao 
 }
-
 
 class Multa{
     - int valorInicial
     - int juros
     - int valorTotal
     - LocalDate hoje 
+}
+
+class PagamentoMulta {
+    - setVirtual(boolean) @Override
+}
+
+class Devolucao{
+    - setVirtual(boolean) @Override
 }
 ```
 ## Processos - Swimlane
