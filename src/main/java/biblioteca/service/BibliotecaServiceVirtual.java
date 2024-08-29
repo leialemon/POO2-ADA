@@ -1,4 +1,4 @@
-package tech.ada.poo.base.biblioteca.service;
+package biblioteca.service;
 
 public interface BibliotecaServiceVirtual extends BibliotecaService{
 }

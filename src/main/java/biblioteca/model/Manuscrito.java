@@ -1,4 +1,4 @@
-package tech.ada.poo.base.biblioteca.model;
+package biblioteca.model;
 
 import java.time.LocalDate;
 

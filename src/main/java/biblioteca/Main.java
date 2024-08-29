@@ -1,4 +1,4 @@
-package tech.ada.poo.base.biblioteca;
+package biblioteca;
 
 import tech.ada.poo.base.biblioteca.model.*;
 

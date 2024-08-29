@@ -1,4 +1,4 @@
-package tech.ada.poo.base.biblioteca.persistence;
+package biblioteca.persistence;
 
 import tech.ada.poo.base.biblioteca.model.ItemCatalogo;
 

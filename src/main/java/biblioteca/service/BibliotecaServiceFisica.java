@@ -1,4 +1,4 @@
-package tech.ada.poo.base.biblioteca.service;
+package biblioteca.service;
 
 import tech.ada.poo.base.biblioteca.model.ItemCatalogo;
 

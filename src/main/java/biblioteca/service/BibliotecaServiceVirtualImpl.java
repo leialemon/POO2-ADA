@@ -1,7 +1,7 @@
-package tech.ada.poo.base.biblioteca.service;
+package biblioteca.service;
 
 import tech.ada.poo.base.biblioteca.model.ItemCatalogo;
-import tech.ada.poo.base.biblioteca.persistence.BibliotecaRepositorio;
+import biblioteca.persistence.BibliotecaRepositorio;
 
 
 public class BibliotecaServiceVirtualImpl extends BibliotecaServiceImpl implements BibliotecaServiceVirtual {

@@ -1,8 +1,8 @@
-package tech.ada.poo.base.biblioteca.service;
+package biblioteca.service;
 
 import tech.ada.poo.base.biblioteca.model.ItemCatalogo;
-import tech.ada.poo.base.biblioteca.persistence.BibliotecaRepositorio;
-import tech.ada.poo.base.biblioteca.persistence.BibliotecaRepositorioListImpl;
+import biblioteca.persistence.BibliotecaRepositorio;
+import biblioteca.persistence.BibliotecaRepositorioListImpl;
 
 import java.time.LocalDate;
 
