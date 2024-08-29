@@ -1,16 +1,19 @@
 package biblioteca.persistence;
 
+import biblioteca.model.Autor;
 import biblioteca.model.ItemCatalogo;
+import biblioteca.model.Pessoa;
 
 import java.util.ArrayList;
 import java.util.List;
 // "Banco de dados"
 public class BibliotecaRepositorioListImpl implements BibliotecaRepositorio {
     private List<ItemCatalogo> catalogo = new ArrayList<>();
+    private List<Autor> autores = new ArrayList<>();
 
     @Override
     public void salvar(ItemCatalogo item) {
-        catalogo.add(item);
+        this.catalogo.add(item);
     }
 
     @Override
@@ -37,16 +40,18 @@ public class BibliotecaRepositorioListImpl implements BibliotecaRepositorio {
     public List<ItemCatalogo> getCatalogo() {
         return catalogo;
     }
+
+    @Override
+    public List<Autor> getAutores() {
+        return autores;
+    }
+
+    @Override
+    public void addAutor(Autor autor) {
+        this.autores.add(autor);
+    }
 }
 
-
-//
-//        Atividade Parte 3:
-//        08. Implementar lógica que cadastrar
-//09. Implementar logica do consultar - facam consultar(item)
-//10. Implementar logica do emprestar
-//11. Implementar logica do devolver
-//12. Implementar demais (opcional)
 
 
 
