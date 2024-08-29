@@ -2,7 +2,7 @@ Projetos desenvolvidos nas aulas de Programação Orientada a Objetos II, no cur
 # Biblioteca
 O projeto simula um programa de gerenciamento de biblioteca que oferece serviços virtuais e no ambiente físico.
 
-## Diagrama do projeto
+## Diagrama do projeto (Planejamento)
 ```mermaid
 classDiagram
 
@@ -25,13 +25,24 @@ namespace model{
     class Livro
     class Revista
     class Manuscrito
+    class Secao
+    class Pessoa
+    class Autor
+    class Associado
+    class Operacoes
+    class Reserva
+    class Emprestimo
+    class Multa
 }
 
 <<Interface>>BibliotecaService
 BibliotecaService: +setCatalogo(BibliotecaRepositorio catalogo)
 BibliotecaService: + reservar(ItemCatalogo item)
-BibliotecaService: + consultarItem(ItemCatalogo item)
-BibliotecaService: + consultarTitulo(String titulo)
+BibliotecaService: + cancelarReserva(Reserva)
+BibliotecaService: + consultar(ItemCatalogo item)
+BibliotecaService: + consultar(String titulo)
+BibliotecaService: + consultarAutor(String nomeAutor)
+BibliotecaService: + consultarAutor(Autor autor)
 BibliotecaService <|-- BibliotecaServiceFisica
 BibliotecaService <|-- BibliotecaServiceVirtual
 
@@ -39,12 +50,14 @@ BibliotecaService <|-- BibliotecaServiceVirtual
 BibliotecaServiceFisica: + emprestar(ItemCatalogo item)
 BibliotecaServiceFisica: + devolver(ItemCatalogo item)
 BibliotecaServiceFisica: + cadastrar(ItemCatalogo)
+BibliotecaServiceFisica: + pagarMulta(Multa)
 
 BibliotecaServiceFisica ..|> BibliotecaServiceFisicaImpl
 BibliotecaServiceFisicaImpl: + emprestar(ItemCatalogo item)
 BibliotecaServiceFisicaImpl: + devolver(ItemCatalogo item)
 BibliotecaServiceFisicaImpl: + cadastrar(ItemCatalogo)
 BibliotecaServiceFisicaImpl: - BibliotecaRepositorio catalogo
+BibliotecaServiceFisicaImpl: + pagarMulta(Multa)
 
 <<Abstract>>BibliotecaServiceImpl
 BibliotecaService ..|> BibliotecaServiceImpl
@@ -53,8 +66,11 @@ BibliotecaServiceImpl <|-- BibliotecaServiceVirtualImpl
 BibliotecaServiceImpl: # BibliotecaRepositorio catalogo
 BibliotecaServiceImpl: +setCatalogo(BibliotecaRepositorio catalogo)
 BibliotecaServiceImpl: + reservar(ItemCatalogo item)
-BibliotecaServiceImpl: + consultarItem(ItemCatalogo item)
-BibliotecaServiceImpl: + consultarTitulo(String titulo)
+BibliotecaServiceImpl: + cancelarReserva(Reserva)
+BibliotecaServiceImpl: + consultar(ItemCatalogo item)
+BibliotecaServiceImpl: + consultar(String titulo)
+BibliotecaServiceImpl: + consultarAutor(String nomeAutor)
+BibliotecaServiceImpl: + consultarAutor(Autor autor)
 
 <<Interface>>BibliotecaServiceVirtual
 
@@ -63,17 +79,23 @@ BibliotecaServiceVirtualImpl: - BibliotecaRepositorio catalogo
 
 <<Abstract>>ItemCatalogo
 ItemCatalogo: - String titulo
-ItemCatalogo: - String autor
+ItemCatalogo: - Autor autor
 ItemCatalogo: - LocalDate data
-ItemCatalogo: - boolean reservado
-ItemCatalogo: - boolean emprestado
-ItemCatalogo: + isReservado() boolean reservado
-ItemCatalogo: + setReservado(boolean reservado)
-ItemCatalogo: + isEmprestado() boolean emprestado
-ItemCatalogo: + setEmprestado(boolean emprestado)
+ItemCatalogo: - Secao secao
+ItemCatalogo: - Reserva reservaAtiva
+ItemCatalogo: - boolean disponivel
+ItemCatalogo: - Emprestimo emprestimo
+ItemCatalogo: - List historicoEmprestimos 
+ItemCatalogo: + getReservas() List 
+ItemCatalogo: + setReservado(Reserva)
+ItemCatalogo: + isDisponivel() boolean 
+ItemCatalogo: + setEmprestado(Emprestimo)
+ItemCatalogo: + getEmprestimo() Emprestimo
 ItemCatalogo: +getTitulo() String titulo
-ItemCatalogo: +getAutor() String autor
+ItemCatalogo: +getAutor() Autor autor
 ItemCatalogo: +getData() LocalDate data
+ItemCatalogo: + getSecao() Secao
+ItemCatalogo: + setSecao(Secao)
 ItemCatalogo: + equals(Object obj) boolean
 ItemCatalogo <|-- Livro
 ItemCatalogo <|-- Revista
@@ -108,6 +130,7 @@ class Revista{
     + getEdicao() int numeroEdicao
     + getMes() String mesPublicacao
     + getCategoria() String categoria
+    + setSecao() @Override
 }
 
 class Manuscrito{
@@ -117,6 +140,73 @@ class Manuscrito{
     + getLocal() String localOrigem
     + getConservacao() String estadoConservacao
     + getDigitalizado() boolean digitalizado
+    + setSecao() @Override
+}
+
+<<Enumerate>> Secao
+class Secao{
+    Artes e Cultura 
+    Autoajuda e Desenvolvimento Pessoal 
+    Biografias e Autobiografias 
+    Ciências Naturais 
+    Ciências Sociais 
+    Esportes e Lazer 
+    Ficção Científica e Fantasia 
+    Gastronomia 
+    História 
+    Literatura Infantil 
+    Literatura Juvenil
+    Manuscritos 
+    Poesia 
+    Religião e Espiritualidade
+    Revistas 
+    Romance
+    Tecnologia e Ciências Aplicadas
+}
+
+<<Abstract>> Pessoa
+Pessoa: - String nome
+Pessoa <|-- Autor
+Pessoa <|-- Associado
+
+class Autor{
+    - String biografia
+    - List<ItemCatalogo> obras
+}
+
+class Associado{
+    - LocalDate dataDeCadastro
+    - List historicoEmprestimos
+    - List historicoReservas 
+    - Emprestimo emprestimoAtivo
+    - Reserva reservaAtiva
+    - List multas
+}
+
+<<Abstract>> Operacoes
+Operacoes <|-- Emprestimo
+Operacoes <|-- Multa
+Operacoes <|-- Reserva
+
+class Operacoes{
+    - Associado associado
+    - boolean virtual
+    - ItemCatalogo item
+    - LocalDate dataRealizada
+    + setVirtual(boolean)
+}
+
+class Emprestimo{
+    - setVirtual() @Override
+    - LocalDate devolucao 
+}
+
+
+class Multa{
+    - int valorInicial
+    - int juros
+    - int valorTotal
+    - LocalDate hoje 
 }
 ```
 ## Processos - Swimlane
