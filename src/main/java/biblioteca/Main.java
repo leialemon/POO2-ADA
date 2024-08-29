@@ -28,7 +28,7 @@ public class Main {
 //    public static void mostrarCatalogo (catalogo){
 //        for (ItemCatalogo item : catalogo) {
 //            System.out.println("Título: " + item.getTitulo());
-//            System.out.println("Autor: " + item.getAutor());
+//            System.out.println("Autor: " + item.getAutorNome());
 //            System.out.println("Data de cadastro: " + item.getData());
 //            switch (item) {
 //                case Livro livro -> {
