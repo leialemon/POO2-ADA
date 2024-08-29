@@ -1,42 +1,53 @@
 package biblioteca.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
 
 public abstract class ItemCatalogo {
     private String titulo;
     private String autor;
-    private LocalDate data;
-    private boolean reservado;
-    private boolean emprestado;
+    private Secao secao;
+    private Reserva reservaAtiva;
+    private Emprestimo emprestimo;
+    List<Operacoes> historico;
 
-    public ItemCatalogo(String titulo, String autor, LocalDate data){
+    public ItemCatalogo(String titulo, String autor, Secao secao){
         this.titulo = titulo;
         this.autor = autor;
-        this.data = data;
+        setSecao(secao);
+        historico = new ArrayList<>();
     }
 
     public String getTitulo(){
-        return titulo;
+        return this.titulo;
     }
 
     public String getAutor(){
-        return autor;
+        return this.autor;
     }
 
-    public LocalDate getData(){
-        return data;
+    public void setSecao(Secao secao){
+        this.secao = secao;
     }
 
-    public boolean isReservado(){ return reservado;}
+    public Secao getSecao(){return this.secao;}
 
-    public void setReservado(boolean reservado){
-        this.reservado = reservado;
+    public void setReservado(Reserva reserva){
+        this.reservaAtiva = reserva;
     }
 
-    public boolean isEmprestado(){ return emprestado;}
+    public Reserva getReserva(){
+        return this.reservaAtiva;
+    }
 
-    public void setEmprestado(boolean emprestado){
-        this.emprestado = emprestado;
+    public void setEmprestado(Emprestimo emprestimo){
+        this.emprestimo = emprestimo;
+    }
+
+    public Emprestimo getEmprestimo(){
+        return this.emprestimo;
     }
 
     @Override
@@ -44,6 +55,7 @@ public abstract class ItemCatalogo {
         if (obj != null && !(obj instanceof ItemCatalogo)) return false;
         ItemCatalogo item = (ItemCatalogo) obj; // Casting para fazer comparação.
 
+        assert item != null;
         if ( this.titulo.equalsIgnoreCase(item.getTitulo()) )
             return true;
 

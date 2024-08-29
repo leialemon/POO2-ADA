@@ -1,6 +1,6 @@
 package biblioteca.service;
 
-import biblioteca.model.ItemCatalogo;
+import biblioteca.model.*;
 import biblioteca.persistence.*;
 
 import java.time.LocalDate;
@@ -13,24 +13,21 @@ public class BibliotecaServiceFisicaImpl extends BibliotecaServiceImpl implement
 
     @Override
     public void emprestar(ItemCatalogo item) {
-        item.setEmprestado(true);
-        if (item.isReservado()){item.setReservado(false);}
-        System.out.println("Empréstimo registrado.");
-        LocalDate emprestimo = LocalDate.now();
-        LocalDate devolucao = emprestimo.plusDays(15);
-        System.out.println("Data do Empréstimo: "+ emprestimo);
-        System.out.println("Data de Devolução: "+ devolucao);
+
     }
 
     @Override
     public void devolver(ItemCatalogo item) {
-        item.setEmprestado(false);
-        System.out.println("Item devolvido.");
+
     }
 
     @Override
     public void cadastrar(ItemCatalogo item) {
-        catalogo.salvar(item);
-        System.out.println("Item cadastrado.");
+
+    }
+
+    @Override
+    public void pagarMulta(Multa multa) {
+
     }
 }

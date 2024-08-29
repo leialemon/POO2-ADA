@@ -1,6 +1,6 @@
 package biblioteca.service;
 
-import biblioteca.model.ItemCatalogo;
+import biblioteca.model.*;
 import biblioteca.persistence.BibliotecaRepositorio;
 
 abstract class BibliotecaServiceImpl implements BibliotecaService{
@@ -12,17 +12,30 @@ abstract class BibliotecaServiceImpl implements BibliotecaService{
 
     @Override
     public void reservar(ItemCatalogo item) {
-        item.setReservado(true);
-        System.out.println("Item reservado.");
     }
 
     @Override
-    public void consultarItem(ItemCatalogo item) {
-        catalogo.consultar(item);
+    public void cancelarReserva(Reserva reserva) {
+
     }
 
     @Override
-    public void consultarTitulo(String titulo) {
-        catalogo.consultar(titulo);
+    public void consultar(ItemCatalogo item) {
+
+    }
+
+    @Override
+    public void consultar(String titulo) {
+
+    }
+
+    @Override
+    public void consultarAutor(Autor autor) {
+
+    }
+
+    @Override
+    public void consultarAutor(String nomeAutor) {
+
     }
 }

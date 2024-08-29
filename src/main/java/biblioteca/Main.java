@@ -7,8 +7,6 @@ import biblioteca.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO tirar métodos consultar das classes sub
-
 // Criar classe de pessoas para gerir associados da biblioteca
 // Criar métodos para prorrogar o empréstimo?
 // Criar uma classe empréstimo para registrar datas e aplicar multas?

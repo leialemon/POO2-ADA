@@ -7,8 +7,8 @@ public class Livro extends ItemCatalogo{
     private int numeroPaginas;
     private String editora;
 
-    public Livro(String isbn, int numeroPaginas, String editora, String titulo, String autor, LocalDate data){
-        super(titulo,autor,data);
+    public Livro(String isbn, int numeroPaginas, String editora, String titulo, String autor, Secao secao){
+        super(titulo,autor,secao);
         this.isbn = isbn;
         this.numeroPaginas = numeroPaginas;
         this.editora = editora;
