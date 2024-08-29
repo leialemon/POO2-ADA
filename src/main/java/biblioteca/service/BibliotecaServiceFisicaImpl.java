@@ -1,8 +1,7 @@
 package biblioteca.service;
 
-import tech.ada.poo.base.biblioteca.model.ItemCatalogo;
-import biblioteca.persistence.BibliotecaRepositorio;
-import biblioteca.persistence.BibliotecaRepositorioListImpl;
+import biblioteca.model.ItemCatalogo;
+import biblioteca.persistence.*;
 
 import java.time.LocalDate;
 
@@ -10,11 +9,6 @@ public class BibliotecaServiceFisicaImpl extends BibliotecaServiceImpl implement
 
     public BibliotecaServiceFisicaImpl(BibliotecaRepositorio catalogo){
         super.setCatalogo(catalogo);
-    }
-
-    @Override
-    public void reservar(ItemCatalogo item) {
-        super.reservar(item);
     }
 
     @Override

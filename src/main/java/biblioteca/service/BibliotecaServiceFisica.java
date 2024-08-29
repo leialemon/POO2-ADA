@@ -1,6 +1,6 @@
 package biblioteca.service;
 
-import tech.ada.poo.base.biblioteca.model.ItemCatalogo;
+import biblioteca.model.ItemCatalogo;
 
 public interface BibliotecaServiceFisica extends BibliotecaService{
     public void emprestar(ItemCatalogo item);

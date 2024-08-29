@@ -1,6 +1,6 @@
 package biblioteca.persistence;
 
-import tech.ada.poo.base.biblioteca.model.ItemCatalogo;
+import biblioteca.model.ItemCatalogo;
 
 import java.util.ArrayList;
 import java.util.List;

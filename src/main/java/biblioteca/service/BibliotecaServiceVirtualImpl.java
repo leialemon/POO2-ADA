@@ -1,6 +1,6 @@
 package biblioteca.service;
 
-import tech.ada.poo.base.biblioteca.model.ItemCatalogo;
+import biblioteca.model.ItemCatalogo;
 import biblioteca.persistence.BibliotecaRepositorio;
 
 

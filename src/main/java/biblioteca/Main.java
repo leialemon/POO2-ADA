@@ -1,10 +1,8 @@
 package biblioteca;
 
-import tech.ada.poo.base.biblioteca.model.*;
-
-import tech.ada.poo.base.biblioteca.persistence.*;
-import tech.ada.poo.base.biblioteca.service.*;
-
+import biblioteca.model.*;
+import biblioteca.service.*;
+import biblioteca.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
