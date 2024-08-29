@@ -1,8 +1,9 @@
 package biblioteca.persistence;
 
+import biblioteca.model.Associado;
 import biblioteca.model.Autor;
 import biblioteca.model.ItemCatalogo;
-import biblioteca.model.Pessoa;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +11,21 @@ import java.util.List;
 public class BibliotecaRepositorioListImpl implements BibliotecaRepositorio {
     private List<ItemCatalogo> catalogo = new ArrayList<>();
     private List<Autor> autores = new ArrayList<>();
+    private List<Associado> associados = new ArrayList<>();
 
     @Override
     public void salvar(ItemCatalogo item) {
         this.catalogo.add(item);
+    }
+
+    @Override
+    public void cadastrarAssociado(Associado associado) {
+        this.associados.add(associado);
+    }
+
+    @Override
+    public List<Associado> getAssociados() {
+        return this.associados;
     }
 
     @Override
