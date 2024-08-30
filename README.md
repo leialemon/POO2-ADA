@@ -5,7 +5,7 @@ O projeto simula um programa de gerenciamento de biblioteca que oferece serviço
 ## Usage
 Em construção.
 
-## Diagrama do projeto (Planejamento)
+## Diagrama de classes (Planejamento)
 ```mermaid
 classDiagram
 
@@ -54,10 +54,8 @@ namespace persistence{
 BibliotecaService: +setCatalogo(BibliotecaRepositorio catalogo)
 BibliotecaService: + reservar(ItemCatalogo item)
 BibliotecaService: + cancelarReserva(Reserva)
-BibliotecaService: + consultar(ItemCatalogo item)
-BibliotecaService: + consultar(String titulo)
-BibliotecaService: + consultarAutor(String nomeAutor)
-BibliotecaService: + consultarAutor(Autor autor)
+BibliotecaService: + pesquisarObra(String titulo) ItemCatalogo
+BibliotecaService: + pesquisarAutor(String nomeAutor) Autor
 BibliotecaService: + verPerfilAssociado(Associado associado)
 BibliotecaService <|-- BibliotecaServiceFisica
 BibliotecaService <|-- BibliotecaServiceVirtual
@@ -65,14 +63,18 @@ BibliotecaService <|-- BibliotecaServiceVirtual
 <<Interface>>BibliotecaServiceFisica
 BibliotecaServiceFisica: + emprestar(ItemCatalogo item)
 BibliotecaServiceFisica: + devolver(ItemCatalogo item)
-BibliotecaServiceFisica: + cadastrar(ItemCatalogo)
+BibliotecaServiceFisica: + consultar(Autor)
+BibliotecaServiceFisica: + consultar(ItemCatalogo)
+BibliotecaServiceFisica: - cadastrar(ItemCatalogo)
 BibliotecaServiceFisica: + pagarMulta(Multa)
 
 BibliotecaServiceFisica ..|> BibliotecaServiceFisicaImpl
+BibliotecaServiceFisicaImpl: - BibliotecaRepositorio catalogo
 BibliotecaServiceFisicaImpl: + emprestar(ItemCatalogo item)
 BibliotecaServiceFisicaImpl: + devolver(ItemCatalogo item)
-BibliotecaServiceFisicaImpl: + cadastrar(ItemCatalogo)
-BibliotecaServiceFisicaImpl: - BibliotecaRepositorio catalogo
+BibliotecaServiceFisicaImpl: + consultar(Autor)
+BibliotecaServiceFisicaImpl: + consultar(ItemCatalogo)
+BibliotecaServiceFisicaImpl: - cadastrar(ItemCatalogo)
 BibliotecaServiceFisicaImpl: + pagarMulta(Multa)
 
 <<Abstract>>BibliotecaServiceImpl
@@ -83,10 +85,8 @@ BibliotecaServiceImpl: # BibliotecaRepositorio catalogo
 BibliotecaServiceImpl: +setCatalogo(BibliotecaRepositorio catalogo)
 BibliotecaServiceImpl: + reservar(ItemCatalogo item)
 BibliotecaServiceImpl: + cancelarReserva(Reserva)
-BibliotecaServiceImpl: + consultar(ItemCatalogo item)
-BibliotecaServiceImpl: + consultar(String titulo)
-BibliotecaServiceImpl: + consultarAutor(String nomeAutor)
-BibliotecaServiceImpl: + consultarAutor(Autor autor)
+BibliotecaServiceImpl: + pesquisar(String titulo) ItemCatalogo
+BibliotecaServiceImpl: + pesquisarAutor(String nomeAutor) Autor
 BibliotecaServiceImpl: + verPerfilAssociado(Associado associado)
 
 <<Interface>>BibliotecaServiceVirtual
@@ -275,3 +275,7 @@ class PagamentoMulta{
 ```
 ## Processos - Swimlane
 Em construção.
+### Cadastro de itens
+![Diagrama Swimlanes do processo de cadastrar itens no catálogo da biblioteca](https://static.swimlanes.io/3596ae4e9eeef07982e7e3138aab5063.png)
+#### Método BibliotecaServiceFisicaImpl.cadastrar(item)
+![Diagrama Swimlanes do método cadastrar item da classe BibliotecaServiceFisicaImpl](https://static.swimlanes.io/113f993fbef905ac11f8b7a50a8d09c2.png)
