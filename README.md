@@ -1,10 +1,20 @@
 Projetos desenvolvidos nas aulas de Programação Orientada a Objetos II, no curso de formação em Java ADA B3+ Inclua.
-# Biblioteca
+# Biblioteca (em andamento)
 O projeto simula um programa de gerenciamento de biblioteca que oferece serviços virtuais e no ambiente físico.
+
+## Usage
+Em construção.
 
 ## Diagrama do projeto (Planejamento)
 ```mermaid
 classDiagram
+
+class Main
+
+namespace controller{
+    class ValidacaoEntrada
+    class Menu
+}
 
 namespace service{
     class BibliotecaService
@@ -13,11 +23,6 @@ namespace service{
     class BibliotecaServiceVirtual
     class BibliotecaServiceFisicaImpl
     class BibliotecaServiceVirtualImpl
-}
-
-namespace persistence{
-    class BibliotecaRepositorio
-    class  BibliotecaRepositorioListImpl
 }
 
 namespace model{
@@ -32,12 +37,17 @@ namespace model{
 }
 
 namespace operacoes{
-    class Operacoes
+    class Operacao
     class Reserva
     class Emprestimo
     class Multa
     class PagamentoMulta
     class Devolucao
+}
+
+namespace persistence{
+    class BibliotecaRepositorio
+    class  BibliotecaRepositorioListImpl
 }
 
 <<Interface>>BibliotecaService
@@ -48,6 +58,7 @@ BibliotecaService: + consultar(ItemCatalogo item)
 BibliotecaService: + consultar(String titulo)
 BibliotecaService: + consultarAutor(String nomeAutor)
 BibliotecaService: + consultarAutor(Autor autor)
+BibliotecaService: + verPerfilAssociado(Associado associado)
 BibliotecaService <|-- BibliotecaServiceFisica
 BibliotecaService <|-- BibliotecaServiceVirtual
 
@@ -76,6 +87,7 @@ BibliotecaServiceImpl: + consultar(ItemCatalogo item)
 BibliotecaServiceImpl: + consultar(String titulo)
 BibliotecaServiceImpl: + consultarAutor(String nomeAutor)
 BibliotecaServiceImpl: + consultarAutor(Autor autor)
+BibliotecaServiceImpl: + verPerfilAssociado(Associado associado)
 
 <<Interface>>BibliotecaServiceVirtual
 
@@ -103,17 +115,28 @@ ItemCatalogo <|-- Revista
 ItemCatalogo <|-- Manuscrito
 
 <<Interface>> BibliotecaRepositorio
-BibliotecaRepositorio: + salvar(ItemCatalogo item)
-BibliotecaRepositorio: + consultar(String titulo) boolean
-BibliotecaRepositorio: + consultar(ItemCatalogo item) boolean
+BibliotecaRepositorio: + salvar(ItemCatalogo)
+BibliotecaRepositorio: + addAutor(Autor)
+BibliotecaRepositorio: + cadastrarAssociado(Associado)
+BibliotecaRepositorio: + consultar(String) boolean
+BibliotecaRepositorio: + consultar(ItemCatalogo) boolean
 BibliotecaRepositorio: +getCatalogo() List<ItemCatalogo>
+BibliotecaRepositorio: + getAutores() List<Autores>
+BibliotecaRepositorio: +getAssociados() List<Associado>
 
 BibliotecaRepositorio ..|> BibliotecaRepositorioListImpl
 BibliotecaRepositorioListImpl: - List<ItemCatalogo> catalogo
+BibliotecaRepositorioListImpl: - List<Autor> Autores
+BibliotecaRepositorioListImpl: - List<Associado> associados
 BibliotecaRepositorioListImpl: + salvar(ItemCatalogo)
+BibliotecaRepositorioListImpl: + addAutor(Autor)
+BibliotecaRepositorioListImpl: + cadastrarAssociado(Associado)
 BibliotecaRepositorioListImpl: + consultar(String titulo) boolean
 BibliotecaRepositorioListImpl: + consultar(ItemCatalogo item) boolean
 BibliotecaRepositorioListImpl: +getCatalogo() List<ItemCatalogo>
+BibliotecaRepositorioListImpl: + getAutores() List<Autores>
+BibliotecaRepositorioListImpl: +getAssociados() List<Associado>
+
 
 class Livro{
     -String isbn
@@ -173,6 +196,10 @@ Pessoa <|-- Associado
 class Autor{
     - String biografia
     - List<ItemCatalogo> obras
+    + addObra(ItemCatalogo)
+    + getObras() List
+    + getNome() String
+    + equals(Object)
 }
 
 class Associado{
@@ -182,40 +209,69 @@ class Associado{
     - Reserva reservaAtiva
 }
 
-<<Abstract>> Operacoes
-Operacoes <|-- Emprestimo
-Operacoes <|-- Multa
-Operacoes <|-- Reserva
-Operacoes <|-- PagamentoMulta
-Operacoes <|-- Devolucao
+<<Abstract>> Operacao
+Operacao <|-- Emprestimo
+Operacao <|-- Devolucao
+Emprestimo *-- Devolucao
+Emprestimo o-- Multa
+Operacao <|-- Multa
+Multa *-- PagamentoMulta
+Operacao <|-- PagamentoMulta
+Operacao <|-- Reserva
+Reserva <-- Multa
 
-class Operacoes{
+
+
+class Operacao{
     - Associado associado
     - boolean virtual
     - ItemCatalogo item
-    - LocalDate dataRealizada
+    - LocalDateTime dataRealizada
+    + Operacao(Associado, ItemCatalogo)
+    + Operacao(Associado)
     + setVirtual(boolean)
-}
-
-class Emprestimo{
-    - setVirtual(boolean) @Override
-    - LocalDate devolucao 
+    # setDataRealizada(LocalDateTime)
+    + getDataRealizada() LocalDateTime
 }
 
 class Multa{
-    - int valorInicial
-    - int juros
-    - int valorTotal
-    - LocalDate hoje 
+    - double valorTotal
+    - boolean ativa
+    - PagamentoMulta pagamento
+    # setAtiva(boolean)
+    + getAtiva() boolean
+    # setPagamento(PagamentoMulta) setAtiva(false) 
+    - calcularTotal()
+    + getValorTotal() double
 }
 
-class PagamentoMulta {
-    - setVirtual(boolean) @Override
+
+class Emprestimo{
+    - boolean ativo
+    - Devolucao devolucao
+    - LocalDateTime vencimento
+    - setAtivo(boolean)
+    + isAtivo() boolean
+    # setDevolucao(Devolucao) setAtivo(false)
+    + getVencimento() LocalDateTime
+}
+
+class Reserva{
+    - boolean ativa
+    + setAtiva(boolean)
+    + getAtiva() boolean
+    + Reserva() setAtiva(true)
 }
 
 class Devolucao{
-    - setVirtual(boolean) @Override
+    - Emprestimo
+    + construtor(Emprestimo) Emprestimo.setDevolucao(this.Devolucao) 
+    }
+
+class PagamentoMulta{
+    - Multa
+    + PagamentoMulta(Associado, Multa) 
 }
 ```
 ## Processos - Swimlane
-![Diagrama de processos do projeto no modelo Swimlane.](https://static.swimlanes.io/f5274c09f316e82127e5cae09fd2fca2.png)
+Em construção.
