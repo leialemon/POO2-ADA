@@ -8,6 +8,7 @@ import biblioteca.model.ItemCatalogo;
 import java.util.ArrayList;
 import java.util.List;
 // "Banco de dados"
+// ordenar catálogo
 public class BibliotecaRepositorioListImpl implements BibliotecaRepositorio {
     private List<ItemCatalogo> catalogo = new ArrayList<>();
     private List<Autor> autores = new ArrayList<>();

@@ -7,7 +7,7 @@ public class Manuscrito extends ItemCatalogo{
     private String estadoConservacao;
     private boolean digitalizado;
 
-    public Manuscrito(String titulo, String autor, String localOrigem, String estadoConservacao, boolean digitalizado){
+    public Manuscrito(String titulo, Autor autor, String localOrigem, String estadoConservacao, boolean digitalizado){
         super(titulo, autor, Secao.MANUSCRITOS);
         this.localOrigem = localOrigem;
         this.estadoConservacao = estadoConservacao;

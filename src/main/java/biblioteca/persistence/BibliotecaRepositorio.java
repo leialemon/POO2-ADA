@@ -7,6 +7,7 @@ import biblioteca.model.ItemCatalogo;
 import java.util.List;
 
 public interface BibliotecaRepositorio {
+    // TODO ordenar catálogo
     public  void salvar(ItemCatalogo item);
     public void addAutor(Autor autor);
     public void cadastrarAssociado(Associado associado);
