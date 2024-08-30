@@ -1,5 +1,9 @@
 package biblioteca.model;
 
+import biblioteca.model.operacoes.Emprestimo;
+import biblioteca.model.operacoes.Operacao;
+import biblioteca.model.operacoes.Reserva;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +13,7 @@ public abstract class ItemCatalogo {
     private Secao secao;
     private Reserva reservaAtiva;
     private Emprestimo emprestimo;
-    List<Operacoes> historico;
+    List<Operacao> historico;
 
     public ItemCatalogo(String titulo, Autor autor, Secao secao){
         if(titulo == null || autor == null){

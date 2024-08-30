@@ -1,9 +1,8 @@
 package biblioteca.service;
 
 import biblioteca.model.*;
+import biblioteca.model.operacoes.Multa;
 import biblioteca.persistence.*;
-
-import java.time.LocalDate;
 
 public class BibliotecaServiceFisicaImpl extends BibliotecaServiceImpl implements BibliotecaServiceFisica{
 

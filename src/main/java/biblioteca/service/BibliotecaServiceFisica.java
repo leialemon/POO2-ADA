@@ -1,6 +1,7 @@
 package biblioteca.service;
 
 import biblioteca.model.*;
+import biblioteca.model.operacoes.Multa;
 
 public interface BibliotecaServiceFisica extends BibliotecaService{
     public void emprestar(ItemCatalogo item);

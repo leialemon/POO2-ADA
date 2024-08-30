@@ -1,6 +1,7 @@
 package biblioteca.service;
 
 import biblioteca.model.*;
+import biblioteca.model.operacoes.Reserva;
 import biblioteca.persistence.BibliotecaRepositorio;
 
 public interface BibliotecaService {
