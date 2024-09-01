@@ -1,5 +1,11 @@
 Projetos desenvolvidos nas aulas de Programação Orientada a Objetos II, no curso de formação em Java ADA B3+ Inclua.
+
+# Comparadores
+src/main/java/comparator
+Exercícios com comparable e comparator.
+
 # Biblioteca (em andamento)
+src/main/java/biblioteca
 O projeto simula um programa de gerenciamento de biblioteca que oferece serviços virtuais e no ambiente físico.
 
 ## Usage
