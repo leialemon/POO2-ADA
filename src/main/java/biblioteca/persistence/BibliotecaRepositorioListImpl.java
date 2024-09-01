@@ -6,9 +6,10 @@ import biblioteca.model.ItemCatalogo;
 import java.io.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-// "Banco de dados"
-// ordenar catálogo
+
+
 public class BibliotecaRepositorioListImpl implements BibliotecaRepositorio {
     private List<ItemCatalogo> catalogo = new ArrayList<>();
     private List<Autor> autores = new ArrayList<>();
@@ -33,7 +34,8 @@ public class BibliotecaRepositorioListImpl implements BibliotecaRepositorio {
         } catch (IOException | ClassNotFoundException e){
             System.err.println("Erro! "+ e);
         }
-        return this.associados;
+        Collections.sort(associados);
+        return associados;
     }
     @Override
     public void salvar(ItemCatalogo item) {
@@ -54,7 +56,8 @@ public class BibliotecaRepositorioListImpl implements BibliotecaRepositorio {
         } catch (IOException | ClassNotFoundException e){
             System.err.println("Erro! "+ e);
         }
-        return this.catalogo;
+        Collections.sort(catalogo);
+        return catalogo;
     }
 
     @Override
@@ -76,7 +79,8 @@ public class BibliotecaRepositorioListImpl implements BibliotecaRepositorio {
         } catch (IOException | ClassNotFoundException e){
             System.err.println("Erro! "+ e);
         }
-        return this.autores;
+        Collections.sort(autores);
+        return autores;
     }
 
     @Override

@@ -2,7 +2,7 @@ package biblioteca.model;
 
 import java.io.Serializable;
 
-abstract public class Pessoa implements Serializable {
+abstract public class Pessoa implements Serializable, Comparable<Pessoa> {
     private String nome;
     public Pessoa (String nome){
         if (nome == null){
@@ -19,5 +19,10 @@ abstract public class Pessoa implements Serializable {
         if(this.nome == null) return false;
         Pessoa pessoa = (Pessoa) obj;
         return (this.nome.equalsIgnoreCase(pessoa.getNome()));
+    }
+
+    @Override
+    public int compareTo(Pessoa pessoa) {
+        return this.nome.compareTo(pessoa.getNome());
     }
 }

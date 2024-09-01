@@ -10,7 +10,7 @@ import java.util.List;
 
 
 // Implementar Comparable
-public abstract class ItemCatalogo implements Serializable {
+public abstract class ItemCatalogo implements Serializable, Comparable<ItemCatalogo> {
     private String titulo;
     private Autor autor;
     private Secao secao;
@@ -67,5 +67,17 @@ public abstract class ItemCatalogo implements Serializable {
             return true;
 
         return false;
+    }
+
+    @Override
+    public int compareTo(ItemCatalogo itemCatalogo) {
+        int comparador = this.secao.compareTo(itemCatalogo.getSecao());
+        if (comparador == 0){
+            comparador = this.titulo.compareTo(itemCatalogo.getTitulo());
+            if (comparador == 0){
+                comparador = this.autor.compareTo(itemCatalogo.getAutor());
+            }
+        }
+        return comparador;
     }
 }
