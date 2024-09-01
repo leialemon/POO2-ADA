@@ -1,6 +1,8 @@
 package biblioteca.model;
 
-abstract public class Pessoa {
+import java.io.Serializable;
+
+abstract public class Pessoa implements Serializable {
     private String nome;
     public Pessoa (String nome){
         if (nome == null){

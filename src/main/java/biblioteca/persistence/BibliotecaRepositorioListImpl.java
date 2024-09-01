@@ -3,7 +3,7 @@ package biblioteca.persistence;
 import biblioteca.model.Associado;
 import biblioteca.model.Autor;
 import biblioteca.model.ItemCatalogo;
-
+import java.io.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +15,68 @@ public class BibliotecaRepositorioListImpl implements BibliotecaRepositorio {
     private List<Associado> associados = new ArrayList<>();
 
     @Override
-    public void salvar(ItemCatalogo item) {
-        this.catalogo.add(item);
-    }
-
-    @Override
     public void cadastrarAssociado(Associado associado) {
-        this.associados.add(associado);
+        try{ FileOutputStream salvamento = new FileOutputStream("associados.txt");
+            ObjectOutputStream salvando = new ObjectOutputStream(salvamento);
+            salvando.writeObject(associado);
+        } catch (IOException e){
+            System.err.println("Erro! "+ e);
+        }
     }
 
     @Override
     public List<Associado> getAssociados() {
+        try{
+            FileInputStream carregamento = new FileInputStream("associados.txt");
+            ObjectInputStream carregando = new ObjectInputStream(carregamento);
+            this.associados = (List<Associado>) carregando.readObject();
+        } catch (IOException | ClassNotFoundException e){
+            System.err.println("Erro! "+ e);
+        }
         return this.associados;
+    }
+    @Override
+    public void salvar(ItemCatalogo item) {
+        try{ FileOutputStream salvamento = new FileOutputStream("catalogo.txt");
+            ObjectOutputStream salvando = new ObjectOutputStream(salvamento);
+            salvando.writeObject(item);
+        } catch (IOException e){
+            System.err.println("Erro! "+ e);
+        }
+    }
+
+    @Override
+    public List<ItemCatalogo> getCatalogo() {
+        try{
+            FileInputStream carregamento = new FileInputStream("catalogo.txt");
+            ObjectInputStream carregando = new ObjectInputStream(carregamento);
+            this.catalogo = (List<ItemCatalogo>) carregando.readObject();
+        } catch (IOException | ClassNotFoundException e){
+            System.err.println("Erro! "+ e);
+        }
+        return this.catalogo;
+    }
+
+    @Override
+    public void addAutor(Autor autor) {
+        try{ FileOutputStream salvamento = new FileOutputStream("autores.txt");
+            ObjectOutputStream salvando = new ObjectOutputStream(salvamento);
+            salvando.writeObject(autor);
+        } catch (IOException e){
+            System.err.println("Erro! "+ e);
+        }
+    }
+
+    @Override
+    public List<Autor> getAutores() {
+        try{
+            FileInputStream carregamento = new FileInputStream("autores.txt");
+            ObjectInputStream carregando = new ObjectInputStream(carregamento);
+            this.autores = (List<Autor>) carregando.readObject();
+        } catch (IOException | ClassNotFoundException e){
+            System.err.println("Erro! "+ e);
+        }
+        return this.autores;
     }
 
     @Override
@@ -47,21 +97,6 @@ public class BibliotecaRepositorioListImpl implements BibliotecaRepositorio {
                 return true;
         }
         return false;
-    }
-
-    @Override
-    public List<ItemCatalogo> getCatalogo() {
-        return catalogo;
-    }
-
-    @Override
-    public List<Autor> getAutores() {
-        return autores;
-    }
-
-    @Override
-    public void addAutor(Autor autor) {
-        this.autores.add(autor);
     }
 }
 

@@ -3,9 +3,10 @@ package biblioteca.model.operacoes;
 import biblioteca.model.Associado;
 import biblioteca.model.ItemCatalogo;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-abstract public class Operacao {
+abstract public class Operacao implements Serializable {
     Associado associado;
     boolean virtual;
     ItemCatalogo item;

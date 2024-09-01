@@ -4,10 +4,13 @@ import biblioteca.model.operacoes.Emprestimo;
 import biblioteca.model.operacoes.Operacao;
 import biblioteca.model.operacoes.Reserva;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ItemCatalogo {
+
+// Implementar Comparable
+public abstract class ItemCatalogo implements Serializable {
     private String titulo;
     private Autor autor;
     private Secao secao;
