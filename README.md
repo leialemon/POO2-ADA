@@ -19,9 +19,27 @@ classDiagram
 
 class Main
 
+namespace view{
+    class ItemView
+    class PessoaView
+    class OperacaoView
+}
+
 namespace controller{
     class ValidacaoEntrada
     class Menu
+}
+
+class Menu{
+    pesquisarObra
+    pesquisarAutor
+    cadastrarObra - ok
+    cadastrarAssociado
+    reservar
+    cancelarReserva
+    emprestar
+    devolver
+    pagarMulta
 }
 
 namespace service{
@@ -62,27 +80,25 @@ namespace persistence{
 BibliotecaService: +setCatalogo(BibliotecaRepositorio catalogo)
 BibliotecaService: + reservar(ItemCatalogo item)
 BibliotecaService: + cancelarReserva(Reserva)
-BibliotecaService: + pesquisarObra(String titulo) ItemCatalogo
-BibliotecaService: + pesquisarAutor(String nomeAutor) Autor
-BibliotecaService: + verPerfilAssociado(Associado associado)
+BibliotecaService: + pesquisarObra(String titulo) List ItemCatalogo
+BibliotecaService: + pesquisarAutor(String nomeAutor) List Autor
+BibliotecaService: + pesquisarAssociado(String nomeAssociado) List Associado
 BibliotecaService <|-- BibliotecaServiceFisica
 BibliotecaService <|-- BibliotecaServiceVirtual
 
 <<Interface>>BibliotecaServiceFisica
 BibliotecaServiceFisica: + emprestar(ItemCatalogo item)
 BibliotecaServiceFisica: + devolver(ItemCatalogo item)
-BibliotecaServiceFisica: + consultar(Autor)
-BibliotecaServiceFisica: + consultar(ItemCatalogo)
-BibliotecaServiceFisica: - cadastrar(ItemCatalogo)
+BibliotecaServiceFisica: + cadastrar(ItemCatalogo)
+BibliotecaServiceFisica: + cadastrar(Associado)
 BibliotecaServiceFisica: + pagarMulta(Multa)
 
 BibliotecaServiceFisica ..|> BibliotecaServiceFisicaImpl
 BibliotecaServiceFisicaImpl: - BibliotecaRepositorio catalogo
 BibliotecaServiceFisicaImpl: + emprestar(ItemCatalogo item)
 BibliotecaServiceFisicaImpl: + devolver(ItemCatalogo item)
-BibliotecaServiceFisicaImpl: + consultar(Autor)
-BibliotecaServiceFisicaImpl: + consultar(ItemCatalogo)
-BibliotecaServiceFisicaImpl: - cadastrar(ItemCatalogo)
+BibliotecaServiceFisicaImpl: + cadastrar(ItemCatalogo)
+BibliotecaServiceFisicaImpl: + cadastrar(Associado)
 BibliotecaServiceFisicaImpl: + pagarMulta(Multa)
 
 <<Abstract>>BibliotecaServiceImpl
@@ -93,9 +109,9 @@ BibliotecaServiceImpl: # BibliotecaRepositorio catalogo
 BibliotecaServiceImpl: +setCatalogo(BibliotecaRepositorio catalogo)
 BibliotecaServiceImpl: + reservar(ItemCatalogo item)
 BibliotecaServiceImpl: + cancelarReserva(Reserva)
-BibliotecaServiceImpl: + pesquisar(String titulo) ItemCatalogo
-BibliotecaServiceImpl: + pesquisarAutor(String nomeAutor) Autor
-BibliotecaServiceImpl: + verPerfilAssociado(Associado associado)
+BibliotecaServiceImpl: + pesquisarObra(String titulo) List ItemCatalogo
+BibliotecaServiceImpl: + pesquisarAutor(String nomeAutor) List Autor
+BibliotecaServiceImpl: + pesquisarAssociado(String nomeAssociado) List Associado
 
 <<Interface>>BibliotecaServiceVirtual
 
@@ -118,6 +134,7 @@ ItemCatalogo: +getAutor() Autor autor
 ItemCatalogo: + getSecao() Secao
 ItemCatalogo: + setSecao(Secao)
 ItemCatalogo: + equals(Object obj) boolean
+ItemCatalogo: + compareTo(ItemCatalogo item) int
 ItemCatalogo <|-- Livro
 ItemCatalogo <|-- Revista
 ItemCatalogo <|-- Manuscrito
@@ -126,7 +143,8 @@ ItemCatalogo <|-- Manuscrito
 BibliotecaRepositorio: + salvar(ItemCatalogo)
 BibliotecaRepositorio: + addAutor(Autor)
 BibliotecaRepositorio: + cadastrarAssociado(Associado)
-BibliotecaRepositorio: + consultar(String) boolean
+BibliotecaRepositorio: + consultar(Associado) boolean
+BibliotecaRepositorio: + consultar(Autor) boolean
 BibliotecaRepositorio: + consultar(ItemCatalogo) boolean
 BibliotecaRepositorio: +getCatalogo() List<ItemCatalogo>
 BibliotecaRepositorio: + getAutores() List<Autores>
@@ -136,10 +154,11 @@ BibliotecaRepositorio ..|> BibliotecaRepositorioListImpl
 BibliotecaRepositorioListImpl: - List<ItemCatalogo> catalogo
 BibliotecaRepositorioListImpl: - List<Autor> Autores
 BibliotecaRepositorioListImpl: - List<Associado> associados
-BibliotecaRepositorioListImpl: + salvar(ItemCatalogo)
-BibliotecaRepositorioListImpl: + addAutor(Autor)
-BibliotecaRepositorioListImpl: + cadastrarAssociado(Associado)
-BibliotecaRepositorioListImpl: + consultar(String titulo) boolean
+BibliotecaRepositorioListImpl: + salvar(ItemCatalogo item)
+BibliotecaRepositorioListImpl: + addAutor(Autor autor)
+BibliotecaRepositorioListImpl: + cadastrarAssociado(Associado associado)
+BibliotecaRepositorioListImpl: + consultar(Associado associado) boolean
+BibliotecaRepositorioListImpl: + consultar(Autor autor) boolean
 BibliotecaRepositorioListImpl: + consultar(ItemCatalogo item) boolean
 BibliotecaRepositorioListImpl: +getCatalogo() List<ItemCatalogo>
 BibliotecaRepositorioListImpl: + getAutores() List<Autores>
@@ -198,6 +217,11 @@ class Secao{
 
 <<Abstract>> Pessoa
 Pessoa: - String nome
+Pessoa: - String dataNascimento
+Pessoa: + getNome() String
+Pessoa: + getDataNascimento() String
+Pessoa: + equals(Pessoa) boolean
+Pessoa: + compareTo(Pessoa) int
 Pessoa <|-- Autor
 Pessoa <|-- Associado
 
@@ -207,7 +231,7 @@ class Autor{
     + addObra(ItemCatalogo)
     + getObras() List
     + getNome() String
-    + equals(Object)
+    + setBiografia(String)
 }
 
 class Associado{
@@ -215,6 +239,16 @@ class Associado{
     - List historico
     - Emprestimo emprestimoAtivo
     - Reserva reservaAtiva
+    - Multa multaPendente
+    + addOperacao()
+    + getDataCadastro()
+    + getHistorico()
+    + getEmprestioAtivo()
+    + getReservaAtiva()
+    + getMultaPendente()
+    + setEmprestioAtivo()
+    + setReservaAtiva()
+    + setMultaPendente()
 }
 
 <<Abstract>> Operacao
@@ -232,12 +266,10 @@ Reserva <-- Multa
 
 class Operacao{
     - Associado associado
-    - boolean virtual
     - ItemCatalogo item
     - LocalDateTime dataRealizada
     + Operacao(Associado, ItemCatalogo)
     + Operacao(Associado)
-    + setVirtual(boolean)
     # setDataRealizada(LocalDateTime)
     + getDataRealizada() LocalDateTime
 }
@@ -246,9 +278,9 @@ class Multa{
     - double valorTotal
     - boolean ativa
     - PagamentoMulta pagamento
-    # setAtiva(boolean)
+    + setAtiva(boolean)
     + getAtiva() boolean
-    # setPagamento(PagamentoMulta) setAtiva(false) 
+    + setPagamento(PagamentoMulta) setAtiva(false) 
     - calcularTotal()
     + getValorTotal() double
 }
@@ -260,7 +292,7 @@ class Emprestimo{
     - LocalDateTime vencimento
     - setAtivo(boolean)
     + isAtivo() boolean
-    # setDevolucao(Devolucao) setAtivo(false)
+    + setDevolucao(Devolucao) setAtivo(false)
     + getVencimento() LocalDateTime
 }
 
@@ -272,13 +304,14 @@ class Reserva{
 }
 
 class Devolucao{
-    - Emprestimo
-    + construtor(Emprestimo) Emprestimo.setDevolucao(this.Devolucao) 
+    + construtor(Item, Associado)
     }
 
 class PagamentoMulta{
-    - Multa
+    - Multa multa
+    - Double valor
     + PagamentoMulta(Associado, Multa) 
+    + getValor() double valor
 }
 ```
 ## Processos - Swimlane
