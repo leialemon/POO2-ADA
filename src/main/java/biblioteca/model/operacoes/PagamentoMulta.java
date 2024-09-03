@@ -8,7 +8,6 @@ public class PagamentoMulta extends Operacao {
         super(associado);
         this.multa = multa;
         //Lógica: pegar multas ativas do associado; pegar valorTotal;
-        setVirtual(false);
         //multa.setPagamento();
     }
 }

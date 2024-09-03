@@ -4,12 +4,13 @@ import biblioteca.model.*;
 import biblioteca.model.operacoes.Reserva;
 import biblioteca.persistence.BibliotecaRepositorio;
 
+import java.util.List;
+
 public interface BibliotecaService {
     public void setCatalogo(BibliotecaRepositorio catalogo);
-    public void reservar(ItemCatalogo item);
+    public void reservar(ItemCatalogo item, Associado associado);
     public void cancelarReserva(Reserva reserva);
-    public void consultar(ItemCatalogo item);
-    public void consultar(String titulo);
-    public void consultarAutor(String nomeAutor);
-    public void consultarAutor(Autor autor);
+    public List<ItemCatalogo> pesquisarObra(String titulo);
+    public List<Associado> pesquisarAssociado(String nomeAssociado);
+    public List<Autor> pesquisarAutor(String nomeAutor);
 }

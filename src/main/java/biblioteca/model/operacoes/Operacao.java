@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 abstract public class Operacao implements Serializable {
     Associado associado;
-    boolean virtual;
     ItemCatalogo item;
     LocalDateTime dataRealizada;
 
@@ -32,7 +31,11 @@ abstract public class Operacao implements Serializable {
         return this.dataRealizada;
     }
 
-    public void setVirtual(boolean virtual) {
-        this.virtual = virtual;
+    public Associado getAssociado(){
+        return this.associado;
+    }
+
+    public ItemCatalogo getItem(){
+        return this.item;
     }
 }

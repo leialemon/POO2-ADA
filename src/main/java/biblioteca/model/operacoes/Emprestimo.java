@@ -13,7 +13,6 @@ public class Emprestimo extends Operacao {
 
     public Emprestimo (Associado associado, ItemCatalogo item){
         super(associado, item);
-        setVirtual(false);
         this.vencimento = this.dataRealizada.plusDays(15);
     }
 
@@ -21,7 +20,7 @@ public class Emprestimo extends Operacao {
         return this.ativo;
     }
 
-    private  void setAtivo(boolean ativo){
+    private void setAtivo(boolean ativo){
         this.ativo = ativo;
     }
 

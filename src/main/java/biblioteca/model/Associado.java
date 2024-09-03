@@ -2,6 +2,7 @@ package biblioteca.model;
 
 
 import biblioteca.model.operacoes.Emprestimo;
+import biblioteca.model.operacoes.Multa;
 import biblioteca.model.operacoes.Operacao;
 import biblioteca.model.operacoes.Reserva;
 
@@ -13,12 +14,21 @@ public class Associado extends Pessoa{
     private List<Operacao> historico;
     private Emprestimo emprestimoAtivo;
     private Reserva reservaAtiva;
-    // Data de nascimento?
-    // Contato? (email/telefone)
+    private Multa multaPendente;
+    private String email; //usar regex para validar?
 
-    public Associado(String nome){
-        super(nome);
+
+    public Associado(String nome, String dataNascimento){
+        super(nome, dataNascimento);
         this.dataDeCadastro = LocalDateTime.now();
+    }
+
+    public Multa getMultaPendente(){
+        return this.multaPendente;
+    }
+
+    public void setMultaPendente(Multa multa){
+        this.multaPendente = multa;
     }
 
     public LocalDateTime getDataDeCadastro(){
@@ -47,8 +57,16 @@ public class Associado extends Pessoa{
         addOperacao(reserva);
     }
 
-    // chamar quando uma operação for feita (multa,pagamento ou devolução)?
+    // chamar quando uma operação for feita (multa, pagamento ou devolução)?
     public void addOperacao(Operacao operacao){
         this.historico.add(operacao);
     }
+
+//    public String toString(){
+//        String associado = "Nome: "+this.getNome()+
+//                            "\nData de nascimento: "+this.getDataNascimento()+
+//                            "\n";
+//        return associado;
+//    }
+
 }

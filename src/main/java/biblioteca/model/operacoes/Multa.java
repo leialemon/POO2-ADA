@@ -24,7 +24,7 @@ public class Multa extends Operacao {
         return this.ativa;
     }
 
-    protected void setPagamento(PagamentoMulta pagamento){
+    public void setPagamento(PagamentoMulta pagamento){
         this.pagamento = pagamento;
         setAtiva(false);
     }

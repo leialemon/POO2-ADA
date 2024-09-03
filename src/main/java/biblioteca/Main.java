@@ -3,8 +3,6 @@ package biblioteca;
 import biblioteca.model.*;
 import biblioteca.service.*;
 import biblioteca.persistence.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 // Primeiro fazer funcionar, depois implementar possibilidade de editar os itens salvos.
@@ -13,9 +11,15 @@ public class Main {
     public static void main(String[] args) {
         // Recomenda-se declarar o tipo da interface e não o da classe que implementa
         BibliotecaRepositorio catalogo = new BibliotecaRepositorioListImpl();
-        BibliotecaServiceVirtual biblioteca = new BibliotecaServiceVirtualImpl(catalogo);
-        List<ItemCatalogo> itens = new ArrayList<>();
-
+        BibliotecaServiceVirtual bibliotecaVirtual = new BibliotecaServiceVirtualImpl(catalogo);
+        BibliotecaServiceFisica bibliotecaFisica = new BibliotecaServiceFisicaImpl(catalogo);
+        Autor james = new Autor("James Rumbaugh");
+        Livro livro1 = new Livro("298547", 650, "Editora Campus","Modelagem e Projetos Baseados em Objetos", james, Secao.TECNOLOGIA_E_CIENCIAS_APLICADAS);
+        bibliotecaFisica.cadastrar(livro1);
+        List <ItemCatalogo> resultados = bibliotecaFisica.pesquisarObra("modelagem");
+        for (ItemCatalogo i : resultados){
+            System.out.println("Título: "+i.getTitulo()+"\nAutor: "+i.getAutor().getNome()+"\nSeção: "+i.getSecao());
+        }
     }
 //
 //    public static void mostrarCatalogo (catalogo){
